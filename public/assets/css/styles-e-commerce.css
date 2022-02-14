@@ -1,0 +1,288 @@
+
+body{
+    position: relative;
+    background-color: rgba(239, 247, 236, 1);
+    
+}
+
+/* Typographie */
+
+h1,h2,h3,h4{
+
+    color:rgba(212, 42, 42, 1);
+    font-family: 'Roboto','Italic';
+    font-weight: 400;
+    
+}
+
+a,p,span,input,label,li{
+    color: #666666;
+    
+}
+
+/* Typographie EO */
+
+/* NAVBAR */
+.navbar.navbar-expand-sm.fixed-top.md-3{
+    background-color: rgba(239, 247, 236, 1);
+    
+}
+.color-nav {
+    color: red;
+    text-decoration :none;
+}
+.navbar-item-custom,.navbar-item-custom a{
+    color: white;
+    text-decoration: none;
+   
+    
+}
+.navbar-item-custom a:hover{
+    
+    color: rgba(245, 245, 245, 0.455);
+}
+
+
+.navbar-nav.me-auto.mb-2.mb-md-0 {
+   
+    display: table;
+    padding: 0px 20px;
+    border-radius: 8px;
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 .nav-item {
+    list-style: none;
+    display: inline-block;
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 .nav-item .nav-link.active {
+    text-decoration: none;
+    position: relative;    
+    display: block;
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 .nav-item .nav-link.active + .nav-link.active {
+    margin-left: 0px;
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 .nav-item .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease;
+    transform: scaleX(0);
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 .nav-link.active:hover::after {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+}
+
+
+/* NAVBAR */
+
+/*BOUTON*/
+.bouton-custom {
+    
+    padding: 10px;
+    width: 100%;
+    border: #dc3545 2px solid;
+    
+}
+.bouton-custom:hover{
+    
+    background-color:rgba(0, 0, 0, 0,1) ;
+    transition: 0.5s;
+    color: white ;
+}
+
+
+/* PRODUCT */
+.product-container{
+    margin-bottom: 125px;
+}
+.product-items {
+    margin-top: 50px;
+ 
+}
+.product-items h4 {
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 1px;
+  
+}
+.product-items .product-subtitle {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+  
+}
+.product-items .product-price {
+    font-size: 14px;
+    font-weight: bold;
+    
+}
+/* [EO] PRODUCT */
+
+/* PRODUIT SHOW */
+.product-page-price {
+    font-size: 19px;
+    font-weight: bold;
+}
+/* EO PRODUIT SHOW */
+
+/* Catégorie */
+.mt-60{
+    margin-top:60px;
+}
+
+.section-block-grey {
+    padding: 90px 0px 90px 0px;
+    background-color: #f9f9f9;
+}
+
+.serv-section-2 {
+    position: relative;
+    border: 1px solid #eee;
+    background: #fff;
+    box-shadow: 0px 10px 30px 0px rgba(50, 50, 50, 0.16);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 30px;
+}
+
+.serv-section-2:before {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    z-index: 0;
+    content: " ";
+    width: 120px;
+    height: 120px;
+    background: #f5f5f5;
+    border-bottom-left-radius: 136px;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+
+.serv-section-2-icon {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    max-width: 100px;
+    z-index: 1;
+    text-align: center;
+}
+
+.serv-section-2-icon i {
+    color: #212529;
+    font-size: 48px;
+    line-height: 65px;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+
+.serv-section-desc {
+    position: relative;
+}
+
+.serv-section-2 h4 {
+    color: rgba(212, 42, 42, 1);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.serv-section-2 h5 {
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+.section-heading-line-left {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #212529;
+    border-radius: 25%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.serv-section-2 p {
+    margin-top: 25px;
+    padding-right: 50px;
+}
+
+.serv-section-2:hover .serv-section-2-icon i {
+    color: rgba(212, 42, 42, 0.618);
+}
+
+.serv-section-2:hover:before {
+    background: rgba(29, 24, 24, 0.939);
+}
+/* EO Catégorie */
+
+
+/* register */
+.item-register{
+    font-size: 16px;
+    font-family: "Roboto";
+    font-weight: 300; 
+    line-height: 1.5625; 
+    margin-bottom: 15px;
+    margin: auto;
+   
+}
+
+/* footer */
+.footer-custom{
+    text-align: center;
+    padding: 50px;
+    bottom: 0;
+    width: 100%;
+    padding-top: 25px;
+    margin-top: 150px;
+}
+.cart-icon {
+
+    height:28px;
+    padding-left:5px;
+
+}
+.block-small{
+
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Catégorie "Nos produits" */
+.bouton-search{
+    margin-top: auto !important;
+    margin-left: 5px !important;
+
+}
+.form-check-label{
+    cursor: pointer;
+}
+.form-check {
+    background-color:rgba(255, 0, 0, 0.17);
+    cursor: pointer;
+    padding: 10px 65px;
+    margin-top: 16px;
+    font-size: small;
+    border-radius: 10px ;
+}
+
+.col-form-label{
+    font-weight: bold;
+    margin: 5px;
+}
+.order-summary{
+    background-color:#f4f8ff ;
+    padding:20px;
+    margin-top: 20px;
+}

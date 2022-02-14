@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses {% endblock %}
+
+{% block content %}
+    <a href="{{ path("account_address_add") }}" class="btn btn-small btn-success m-2 text-white"> + Ajouter une adresse</a>
+
+<h1>Mes adresses</h1>
+<p>Modifier vos adresses ici ! </p>
+{#
+   --- Affichage de l'utilisateur connecter ---
+#}
+<a href="{{ path("account") }}">Retournez sur mon compte</a>
+<hr>
+
+{% if app.user.adresses | length == 0  %}
+    <p class="text-center">Vous n'avez pas ajouter d'adresse sur votre compte <a href="{{ path("account_address_add")}}">Ajouter une adresse</a></p>
+{% else %}
+
+{# Affichage de mais addresse #}
+
+<div class="row">
+
+{% for adress in app.user.adresses %}
+    <div class="col-md-4">
+    <div class="card p-2 m-2  bg-light bg-opacity-25 text-white" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="text-dark">{{ adress.name }}</h5>
+            <hr class="text-dark">
+            <p class="">
+                <b><i class="bi bi-house-door"></i>  </b><small><strong>{{ adress.address }} </strong> </small><br>
+                <b><i class="bi bi-compass"></i>  </b><small><strong>{{ adress.postal }} </strong> </small> <br>
+                <b><i class="bi bi-pin-map"></i>  </b><small> <strong>{{ adress.city }} - {{ adress.country }} </strong> </small> <br>
+                <b><i class="bi bi-briefcase"></i>  </b><small>
+                {% if adress.company == null %}
+                  <strong>  - Non renseigner </strong>
+                {% else %}            
+               <strong> {{ adress.company }} </strong>
+                {% endif %}
+                </small>  
+            </p>
+            <hr  class="text-dark">
+            
+               <b> <a href="{{path("account_address_edit", {'id' : adress.id })}}" class="text-info">Modifier</a> | <a href="{{path("account_address_delete", {'id' : adress.id })}}" class="text-danger">Supprimer</a></b>
+            
+        </div>
+    </div>
+    </div>
+{% endfor %}
+</div>
+    
+{% endif %}
+<hr> 
+{% endblock %}
+

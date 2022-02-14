@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{products.name}} {% endblock %}
+
+{% block content %}
+    {# Fiche produit #}
+    <div class = "row bg-light shadow p-5">
+
+        <div class="col-md-5">
+            <img  src="/assets/imageProduct/{{products.illustration}}" alt="{{products.name}}" class="img-fluid p-5">
+        </div> 
+
+         <div class="col-md-7 my-auto">
+            <h3 class="text-uppercase">{{products.name}}</h3><small class="badge bg-secondary shadow-sm text-uppercase">{{ products.category }}</small>
+            <p>{{ products.subtitle }}</p>
+           <span class="badge bg-danger shadow rounded-3 p-2 text-white mt-2">{{(products.price / 100) | number_format(2,',','.')}} €</span>
+            <hr>
+            <p> {{products.description}} </p>
+            <a href="{{ path('add_to_cart',{"id":products.id} ) }}" class="btn btn-outline-danger   bouton-custom"><i class="bi bi-plus-circle-fill fs-5  p-2"></i>Ajouter au panier</a>
+        </div> 
+
+    </div>
+    {# EO Fiche produit #}
+    <hr>
+    {# Produit a la une #}
+     <!-- Three columns of text below the carousel -->
+         <h3>Nos meilleures vente</h3>
+         <p>Nos articles les plus vendu</p>
+    <div class="row">
+
+     {% for product in product %}
+     <div class="col-md-3   ">
+      {% include "product/single_product.html.twig" %}
+     </div>
+       
+     {% endfor %}
+{% endblock %}

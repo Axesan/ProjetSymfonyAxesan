@@ -1,19 +1,193 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="  La boutique qui vend de la qualité a moitier prix">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,100&display=swap" rel="stylesheet"> 
+    <title>{% block title %}E-commerce{% endblock %}</title>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- Bootstrap core CSS -->
+  <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Favicons -->
+  <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  {# CSS CUSTOM #}
+  <link rel="stylesheet" href="{{asset('assets/css/styles-e-commerce.css')}}" >
+  <link href="{{asset('assets/css/carousel.css')}}" rel="stylesheet">
+
+  <meta name="theme-color" content="#7952b3">
+{% block javascript %}{% endblock %}
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body class="bg-light">
+<header>
+
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top  bg-dark  md-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ path("home") }}">E-commerce</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ path('products') }}">Nos Produits</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Qui sommes-nous ? </a>
+           </li>
+             <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Contact </a>
+             </li>
+       
+        </ul> 
+
+        {# Barre utilisateur #}
+      <div class="navbar-item-custom  ms-4 p-2 " >
+          {% if app.user %}
+          <a class="my-auto" href="{{ path('account') }}"><small><i class=" fs-5 p-1 bi bi-person-rolodex"></i> {{app.user.firstname}} - {{app.user.lastname}}</small></a> 
+          <a class="p-1" href="{{ path('app_logout') }}"><i class="p-1 text-danger bi bi-box-arrow-right"></i>Déconnexion</a>
+         
+            {% else %}
+          <a  href="{{ path('app_login') }}"><i class="bi bi-person  p-2 "></i>Connexion</a> | <a class="p-2" href="{{ path('register')}}"><i class="bi bi-person-plus p-2"></i>Inscription</a>
+          {% endif %}
+     
+          {# Panier #}
+          
+        <a class="border my-auto p-md-2 rounded " href="{{ path("cart") }}">
+          <i class="bi bi-cart4  " style="font-size:20px"></i> 
+        </a>
+        
+        {# EO Panier #}
+       
+      </div>
+ {# Barre utilisateur #}
+
+    </div>
+   
+  </nav>
+</header>
+
+<main>
+{# 
+  Condition IF
+  Si le block et definit alors tu affiche mon carousel 
+
+#}
+{% if block('carousel') is defined %}
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+
+        {% for key,headers in header %}
+           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{key}}"  {% if key == 0 %} class="active"{% endif %} ></button>
+       {% endfor %}
+
+    </div>
+    {#  header  Carousel #}
+    <div class="carousel-inner">
+          {# Item header #}
+          {% for key, headers in header %}
+            <div class="carousel-item {% if key == 0 %} active {% endif %}" style=" background:url('/assets/imageHeader/{{headers.illustration}}'); background-size:cover; ">
+            {# Contenue #}
+              <div class="container ">
+                <div class="carousel-caption  bg-dark bg-opacity-25 text-start p-5">
+                  <h2 class="text-uppercase text-white">{{headers.title}}</h2>
+                  <p>{{headers.content}}</p>
+                  <p><a class="btn btn-lg btn-warning" href="{{headers.btnUrl }}">{{headers.btnTitle}}</a></p>
+                </div>
+              </div>
+            </div>         
+
+              {% endfor %}
+       
+
+
+      
+    </div>
+    {# Contenu header #}
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+{% endif %}
+
+
+
+  {# 
+    On ajout une class 'mt-5' si le carousel n'est pas definit dans une vue 
+   #}
+  <div class="container marketing {% if block('carousel') is not defined %} mt-5 {% endif %}">
+
+  {# 
+    On ajoute un block 'content' qui est donc le contenue de mon site
+   #}
+    
+        <div class="alert alert-info text-center my-auto mb-5">
+         <small><i class="bi bi-exclamation-circle text-danger"></i> <strong>ATTENTION</strong>  Dans le cadre de mon apprentissage avec le framework "<strong>Symfony</strong>"<br> AUCUNE COMMANDE NE SERA PRISE EN COMPTE  </small> 
+        </div>
+   
+{% block content %}
+    
+{% endblock %}
+   
+  </div><!-- /.container -->
+
+
+  <!-- FOOTER -->
+  <footer class="footer-custom  bg-dark ">   
+    <p class="text-white">
+      &copy; 2017–2021 E-commerce Company<br>
+    <small>  La boutique 100% made in France
+      &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></small>
+      
+    </p>
+  </footer>
+</main>
+
+
+    <script src="{{asset('assets/js/bootstrap.bundle.js')}}"></script>
+
+      
+  </body>
+  {% block script %}{% endblock %}
 </html>

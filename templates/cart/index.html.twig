@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block content %}
+    <h1>Mon panier</h1>
+    Retrouver vos produits que vous avez ajouter  
+{# Si le panier et plein tu m'affiche le panier sinon on met une notifs #}
+<div class="row">
+{% if cart | length > 0 %}     
+<div class="col-lg-6">  
+<table class="table  mt-5 ">
+  <thead >
+    <tr class="table-light">    
+      <th scope="col ">Produit</th>
+      <th scope="col "></th>
+      <th scope="col ">Quantité</th>
+      <th scope="col ">Prix</th>
+      <th scope="col ">Total</th>
+      <th scope="col "></th>
+      
+    </tr>
+  </thead>
+  
+<tbody>
+    {# On initialise une variables total pour le total des produits qui est donc null on va donc l'incrementer grâce a notre boucle for #}
+    {% set total = null %}
+  {# Boucles foreach pour mapper les données  #}
+    {% for product in cart %}
+         <tr>    
+            <th  class="table-success">
+            <img  src="/assets/imageProduct/{{product.product.illustration}}" alt="{{product.product.name}}" class="p-2" height='75px'>
+        </th>
+  
+      <td class="table-success">
+        <small>{{product.product.name}}</small><br>
+        
+       <small> {{product.product.subtitle}} </small>
+      </td>
+      <td>
+          <a href="{{path('decrease_to_cart',{'id':product.product.id})}}" style="text-decoration:none">
+            <img class="" src="{{asset('assets/img/minus-1.png') }}" height="15px" alt="Supprimer mon produit"/>
+          </a>
+            <small>x {{product.quantity}}</small>
+          <a href="{{path('add_to_cart',{'id':product.product.id})}}">            
+            <img src="{{asset('assets/img/plus-1.png') }}" height="15px" alt="Ajouter en plus le produit produit"/>
+          </a>
+      </td>
+
+      <td class="table-danger " style='font-size:12px'>{{ (product.product.price / 100) | number_format(2,',','.')}}€</td>
+      <td style='font-size:12px'>{{ ((product.product.price * product.quantity ) / 100) | number_format(2,',','.')}}€</td>
+       <td><a href="{{path('delete_to_cart',{'id':product.product.id})}}"><img src="{{asset('assets/img/delete.png') }}" height="35px" alt="Supprimer mon produit"/></a></td>
+    </tr>
+    {% set total = total + (product.product.price * product.quantity) %}
+    {% endfor %}
+
+</tbody>
+</table>
+
+     <b>Nombre de produits : {{cart | length}}</b><br> 
+    <b>Total de mon panier : {{ (total / 100) | number_format(2,',','.')}} € </b><br>
+</div> 
+
+{# Button achat valider panier + recap #}
+<div class="col-lg-6 p-5">
+    <div class="text-right d-grid gap-2 col-6 mx-auto ">
+    {# 
+        La balise "{{cart | length}}" permet de calculer le nombre de produits du clients 
+    
+     #} 
+     <a href="{{ path('products') }}" class="btn btn-warning py-4"><i class="bi bi-bag-plus p-2"></i>Je continue mes achats</a><hr>
+     <a href="{{ path('order') }}" class="btn btn-outline-success py-4"><i class="bi bi-send-check p-2 py-2"></i>Valider mon panier | <strong>{{ (total / 100) | number_format(2,',','.')}} </strong>€</a>
+    </div>
+</div>
+    <hr class="mt-5">
+
+  <div class="row">
+  <h2>Produits qui pourrait vous plaire</h2>
+    {% for product in products %}
+     <div class="col-md-3  p-md-5  "> 
+      {% include "product/single_product.html.twig" %}
+     </div>
+       
+     {% endfor %}
+    </div>
+
+
+</div>
+{% else %}
+    <hr>
+    <p><b>Votre panier est vide ... </b></p> 
+    <hr>
+
+ <div class="section-heading center-holder mt-4">
+            <h3 class="text-uppercase">Recherchez parmis nos catégorie de produits  </h3>
+            <div class="section-heading-line"></div>
+            <p>Vous êtes plutôt connecter ? Marre d'avoir froid quand vous sortez ?
+                <br><strong>E-commerce</strong> propose un large catalogue dans de differentes catégories ! </p>
+        </div>
+
+      {% for categories in categorie %}
+
+                  <div  class="col-md-4 col-sm-12 col-12 mt-5" >
+                    <a class="text-decoration-none" href="{{ path('products') }}">
+                        <div class="serv-section-2 m-2">
+                            <div class="serv-section-2-icon"> <i class="{{categories.icone}}"></i> </div>
+                            <div class="serv-section-desc">
+                                <h4>
+                                  {{ categories.name }}
+                                </h4>
+                                </div>
+                            <div class="section-heading-line-left"></div>
+                        </div>  
+                        </a>                   
+                  </div>
+
+        {% endfor %}
+        <hr class="mt-4">
+<div class="row mt-5">
+     <h3>Recherchez parmis de nombreux produits ! </h3>
+     {% for product in products %}
+     <div class="col-md-3  p-md-5">
+     
+      {% include "product/single_product.html.twig" %}
+     </div>
+       
+     {% endfor %}
+     </div>
+  
+
+{% endif %}
+   
+{% endblock %}

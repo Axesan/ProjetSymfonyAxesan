@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-commerce-connexion{% endblock %}
+
+{% block content %}
+{# Modifier css  #}
+
+<div class='row p-4  '>
+
+    <form class="col-md-5" method="post">
+                {# Erreur en cas d'erreurs dans la saisie #}
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecter <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </div>
+                {% endif %}
+
+                {# Notification mot de passe succés #}
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-success">
+                        {{message}}
+                    </div>
+                {% endfor %}
+
+                <h1 class="h3 mb-3 text-uppercase">Connexion</h1>
+                     <label  class="py-2" for="">Email *</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text bg-secondary border-2 bg-opacity-25 " id="basic-addon1"><i class="m-1 bi bi-envelope-fill"></i></span>
+                            </div>        
+                                <input type="email" value="{{ last_username }}"  placeholder="Entrez votre E-mail" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>            
+                            </div>
+                        
+                     <label class="py-2" for="">Mot de passe *</label>
+                    <div class="input-group mb-3 border ">
+                        <div class="input-group-prepend  ">
+                                <span class="input-group-text bg-secondary bg-opacity-25" id="basic-addon1"><i class="bi bi-lock-fill m-1"></i></span>
+                        </div>
+                        <input type="password" name="password" id="inputPassword" placeholder="Entrez votre mot de passe" class="form-control " autocomplete="current-password" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+
+                {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html #}
+
+                    <div class="checkbox mb-3">
+                        <label class="m-2">
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>           
+                    </div>
+            
+                <hr>
+                <div class="text-center">
+                    <small class="m-2">
+                        Pas encore de compte ? <a href="{{ path('register') }}">Inscrivez-vous</a>
+                    </small> <br>
+                    <small class="m-2">
+                        Mot de passe oublié ? <a href="{{ path('reset_password') }}">Cliquez-ici</a>
+                    </small> <br>
+                <button class="btn btn-outline-danger bouton-custom mt-3" type="submit">
+                    Se connecter
+                </button>
+                </div>            
+    </form>
+<div class="col-lg-7 col-sm-7">
+
+<div class="text-center col-sm">
+ <h2 class='text-uppercase fs-4'>Nous somme ravie de vous avoir parmis nous !</h2>
+ <p>Connectez vous pour accéder à votre compte !</p>
+ <hr>
+    
+<img src="/assets/global/img-dark.svg" alt="" srcset="" class="img-fluid mt-5" style="width:50%">
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

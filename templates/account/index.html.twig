@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenue sur votre compte  <span class="text-dark"> {{app.user.firstname}} </span></h1>
+<p>C'est ici que vous pouvez gerer vos coordonnées .</p>
+{#
+   --- Affichage de l'utilisateur connecter ---
+#}
+<hr>
+{# Si l'utilisateur a le role admin #}
+{% if is_granted('ROLE_ADMIN') %}
+<a class="btn btn-danger py-2 mb-4" href="/admin"><i class="fas fa-user-cog m-2 fs-5"></i> Administration du site </a> <br>
+{% endif %}
+<div class="row">
+<a class='btn btn-outline-dark py-2 m-2 my-auto text-uppercase' href="{{path('account_password')}}"><i class="fas fa-lock m-2 fs-4"></i>Modifier mon mot de passe </a> <br>
+<a class='btn btn-outline-dark py-2 m-2 text-uppercase' href="{{path('account_order')}}"><i class="fas fa-gift  m-2 fs-4"></i> Mes commandes</a><br>
+<a class='btn btn-outline-dark py-2 m-2 text-uppercase' href="{{path('account_address')}}"><i class="fas fa-home  m-2 fs-4"></i>Mes adresses </a><br>
+</div>
+<hr> 
+
+{% endblock %}

@@ -1,0 +1,22 @@
+
+
+
+
+        <div class="product-items   text-center my-auto mt-3 p-4 rounded-3" >
+        {#
+
+          On redirige vers notre page 'show' avec la variable slug car on selectionne le produit a afficher avec le slug 
+          Notre variable et donc "product.slug"
+        
+         #}
+            <a  href="{{ path('product', {'slug' : product.slug}) }}"><img  src="/assets/imageProduct/{{product.illustration}}" alt="{{product.name}}" class="img-fluid"></a>
+            <hr>
+                  <h4 >{{product.name}} <br> <span class="badge bg-secondary"> {{product.category }} </span></h4>
+                  <span class="product-subtitle">{{product.subtitle}}</span>
+                  {# On affiche le prix dans notre base de données cet donnée et en 'float' on affiche le bon format au lieux de 50000 => 50,00  #}
+                  <span class="badge bg-danger shadow rounded-3 p-2 text-white mt-2">{{(product.price / 100) | number_format(2,',','.')}} €</span>
+              
+        </div>
+
+
+

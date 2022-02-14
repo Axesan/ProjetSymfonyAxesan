@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+{% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block title %}Commande !{% endblock %}
+
+{% block content %}
+    <h2>Mon récapitulatif</h2>
+    <p>Vérifier vos information avant de payer votre commande . </p>
+   <hr>
+   <div class="row">
+   <div class="col-md-6">
+     <strong>Mon adresse de livraison : </strong> <br>
+        <div class="form-check fs-6">
+         <p>
+            <strong>Nom d'adresse :</strong> {{ delivery.name }}  <br>        
+            <strong>Nom - Prénom :</strong> {{ delivery.firstname }} {{ delivery.lastname }} <br>
+            <strong>Nom - Entreprise :</strong>  {{ delivery.company }} <br>
+            <strong>Téléphone : </strong> {{ delivery.phone }}<br>
+            <strong>Addresse : </strong> {{ delivery.address }} {{ delivery.postal }} - {{ delivery.city }} <br>
+            <strong>Pays :</strong> {{ delivery.country }}
+         </p>
+</div>
+    <hr>
+    <strong>Transporteur :</strong><br>
+      <div class="form-check  fs-">
+     {{carrier.name}}<br>
+     {{carrier.description}}<br>
+     {{ (carrier.price / 100 )| number_format(2,',','.')}} €
+     </div>
+    <hr>
+   </div>
+
+   <div class="col-md-6">
+        <div class="text-center"> 
+            <b>Ma commande</b><br>
+            <p>Retrouvez le récapitulatif de vos produits ! </p>
+        </div>
+    {% set total = null %}
+        <div class="order-summary">
+       {% for key,product in cart %}
+        <div class="row {% if key > 0 %}mt-2{% endif %}">
+        <div class="col-2"> <img  src="/assets/imageProduct/{{product.product.illustration}}" alt="{{product.product.name}}" class="p-2" height='75px'></div>
+        <div class="col">
+        <div class="col-8 my-auto">
+          {{ product.product.name }} <br>
+          <small>{{ product.product.subtitle }}<br>
+         x {{ product.quantity }}
+          </small>
+        </div>
+        </div>
+        <div class="col-2 my-auto">
+       <span class="product-price">{{(product.product.price / 100) | number_format(2,',','.')}} €</span>
+        </div>
+                
+            </div>
+            <hr>
+             {% set total = total + (product.product.price * product.quantity) %}
+            {% endfor %}
+       </div>      
+    <hr> 
+        <strong>Sous-Total :</strong> {{ (total / 100) | number_format(2,',','.')}} €<br>
+        <strong>Livraison :</strong> {{ (carrier.price / 100) | number_format(2,',','.')}} €<br>
+    <hr>
+    <strong>Total : </strong> {{ (total / 100 + (carrier.price / 100) ) | number_format(2,',','.')}} € <br>
+
+        <a id="checkout-button" class="btn btn-success  mt-3">Payer |  {{ (total / 100 + (carrier.price / 100) ) | number_format(2,',','.')}} €</a>
+     
+   </div> 
+   </div>
+{% endblock %}
+
+{# SCRIPT STRIPE Pour le paiement  #}
+{% block script %}
+        <script>
+
+        var stripe = Stripe('pk_test_51KO0jGKxPRXSB4TZAP3ipSAPfuV8lMAU8ZYjObQuvghijQfy2wMk7WevsAgAOX37FDOEAlozR4UcJWZ8yWROe1r700WDhOxx2j');
+        var checkoutButton = document.getElementById("checkout-button"); 
+        
+        checkoutButton.addEventListener('click',function(){
+                fetch("/commande/create-session/{{reference}}",{
+                    method:"POST",
+                }).then(function(response){
+                    
+                    return response.json();
+
+                }).then(function (session){
+                    //Si y'a une erreur dans 'order"
+                    if(session.error == 'order'){
+                        //redirection 
+                        window.location.replace('{{ path('order') }}')
+
+                    }else{
+                        
+                    return stripe.redirectToCheckout({sessionId : session.id})
+                    }
+                })
+                
+                .then(function (result){
+                    
+                    if(result.error){
+                        alert(result.error.message);
+
+                    }
+                }).catch(function(error){
+                    console.log("errors : ",error)
+                });
+
+        })
+        </script>
+
+{% endblock %}

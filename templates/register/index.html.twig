@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+{# On affiche notre formulaire de notre controller 'Register' #}
+
+{% if notification %}
+
+<div class="alert alert-info">{{ notification }}</div>
+<hr>
+
+{% endif %}
+{{ form_start(form) }}
+<div class="row ">
+
+    {# 1er colonne #}
+        <div class="col-md-8">
+            {# Title deuxieme colonee #}
+                <div>
+                    <h3>Merci de votre confiance</h3>
+                    <p>Notre équipe s'assureront de repondre à vos questions </p>
+                                
+                </div> 
+            {# [eo] Title deuxieme colonee #}
+
+            <div class="row mt-5">
+                            {# iMAGE #}
+                                <div class="col-md-5 text-center"> 
+                                    <img src="/assets/global/complete-dark.svg" alt="" srcset="" class="img-fluid" style="width:50%">
+                                </div>
+                            {# iMAGE #}
+
+                            {# Items #}
+                                    <div class="col-md-4 text-center mt-2">
+                                        <ul class='p-3 list-unstyled shadow-sm'>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-check2-circle  p-2 fs-5 text-success"></i><b>Livraison prise en charge par chronospost ou colissimo</b></li>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-box2-heart-fill p-2  fs-5 text-danger"></i><b>Package soigné lors de l'envoie </b></li>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-clock-history p-2  fs-5 text-info"></i><b>24h Top Chronos </b></li>
+                                        </ul>
+                                    </div>
+                            {# Items #}
+
+                            {# Colonne du bas #}
+
+                                    <div class="col-md-5 text-center mt-2">
+                                        <ul class='p-3 list-unstyled  shadow-sm'>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-check2-circle p-2 fs-5  text-success"></i><b>Paiement rapide et sécurisé</b> </li>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-envelope-check p-2 fs-5 text-danger"></i><b>Recevez votre reçu par E-mail</b> </li>
+                                            <li class="p-2 item-register" style='font-size: 12px;'><i class="bi bi-clock-history p-2  fs-5 text-info"></i><b>Attendez votre colis</b> </li>
+                                        </ul>
+                                    </div>
+
+                            {# Image 2 #}
+                                <div class="col-md-4  text-center">
+                                    <img src="/assets/global/paiement-dark.svg" alt="" srcset="" class="img-fluid mt-3" style="width:50%">
+                                </div> 
+                            {# Image 2 #}
+
+                            {# EO Colonne du bas #}
+                                </div>  {# Eo2 eme row#}
+        </div> 
+    {# EO 1er colonne #}
+
+
+   {# 2éme colonne FORM #}
+        <div class="col-md-4 ">
+         <h1>Inscription</h1>
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password) }}
+            {{ form_row(form.submit) }}
+        </div>
+    {# 2éme colonne FORM #}       
+
+</div>
+{# EO ROW #}
+
+{{ form_end(form) }}{# EO FORMULAIRE #}
+{% endblock %}
+
+

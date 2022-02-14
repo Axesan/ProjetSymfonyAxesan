@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{# On ajoute notre carousel sur page 'home' Grace a la condition if dans base.html.twig #}
+{% block carousel %} {% endblock %}
+
+{# Block "Homepage" donc mon accueil  qui et réustiliser dans base.html.twig #}
+{% block content %}
+         <!-- Three columns of text below the carousel -->
+<div class="row">
+    <div class="section-heading center-holder ">
+         <h3 class="text-uppercase">Nos meilleures vente</h3>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque odio rem dolores? 
+         <br> Dicta dolorem amet quam deserunt quaerat nihil sunt?</p>
+         </div>
+
+     {% for product in products %}
+     <div class="col-md-3  p-md-5 ">
+      {% include "product/single_product.html.twig" %}
+     </div>
+       
+     {% endfor %}
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+   
+    <div class="container">
+
+        <div class="section-heading center-holder">
+            <h3 class="text-uppercase">Nos catégories de produits</h3>
+            <div class="section-heading-line"></div>
+            <p>Vous êtes plutôt connecter ? Marre d'avoir froid quand vous sortez ?
+                <br><strong>E-commerce</strong> propose un large catalogue dans de differentes catégories ! </p>
+        </div>
+
+  <div class="row mt-60">
+
+
+            {# ON AFFICHE LES CATEGORIE #}
+            {% for categories in categorie %}  
+  
+                <div  class="col-md-4 col-sm-12 col-12 " >
+                    <a class="text-decoration-none" href="{{ path('products') }}">
+                      <div class="serv-section-2 m-2">
+                          <div class="serv-section-2-icon"> <i class="{{categories.icone}}"></i> </div>
+                          <div class="serv-section-desc">
+                              <h4>
+                                {{ categories.name }}
+                              </h4>
+                               </div>
+                          <div class="section-heading-line-left"></div>
+                      </div>  
+                    </a>                   
+                </div>
+                  
+                  
+            {% endfor %}
+
+                               
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+{% endblock %}

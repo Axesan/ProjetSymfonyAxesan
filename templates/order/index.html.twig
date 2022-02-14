@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande !{% endblock %}
+
+{% block content %}
+    <h2>Je passe ma commande</h2>
+    <p>Choisissez vos preferences avant de passer votre commande </p>
+   <hr>
+   <div class="row">
+   <div class="col-md-6  ">
+        
+     {#
+           Mise en place de mes choix de livraison de l'utilisateur
+           Des que l'utilisateur soumet son formulaire il sera rediriger
+
+     #} 
+   {% set formHtml %}
+        {{ form_start(form,{action:path('order_recap')}) }}
+        {{ form_end(form) }}
+   {% endset %}
+   {# Mise en place de mais br qui sont initialiser dans Adress.php dans la fonction __toString #}
+   {{ formHtml | replace({"[br]" : "<br/>"})| raw }}
+       
+   </div>
+   <div class="col-md-6 p-3">
+   <div class="text-center"> 
+        <b>Récapitulatif de ma commande</b><br>
+        <p>Retrouvez le récapitulatif de vos produits ! </p>
+   
+   
+   </div>
+        <div class="order-summary">
+       {% for key,product in cart %}
+        <div class="row {% if key > 0 %}mt-2{% endif %}">
+        <div class="col-2"> <img  src="/assets/imageProduct/{{product.product.illustration}}" alt="{{product.product.name}}" class="p-2" height='75px'></div>
+        <div class="col">
+        <div class="col-8 my-auto">
+          {{ product.product.name }} <br>
+          <small>{{ product.product.subtitle }}</small>
+        </div>
+        </div>
+          <div class="col my-auto"> x {{ product.quantity }}</div>          
+            </div>
+            <hr>
+       {% endfor %}
+       </div>
+       
+   </div> 
+   </div>
+{% endblock %}

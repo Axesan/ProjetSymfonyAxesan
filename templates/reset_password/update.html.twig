@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-commerce - Modifier Mot de passe{% endblock %}
+
+{% block content %}
+{# Modifier css  #}
+<div class='block-small shadow p-4'>
+
+
+{% for message in app.flashes('notice') %}
+<div class="alert alert-danger">
+{{message}}
+</div>
+{% endfor %}
+{% for message in app.flashes('notice') %}
+<div class="alert alert-danger">
+{{message}}
+</div>
+{% endfor %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Mettre à jour mon mot de passe </h1>
+        <hr>
+        {{form(form)}}
+</div>
+
+
+
+{% endblock %}

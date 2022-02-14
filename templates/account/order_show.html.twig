@@ -1,0 +1,78 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commandes {% endblock %}
+
+
+
+
+{% block content %}
+    
+
+<h2>Ma commande <strong>N° {{ order.reference }}</strong></h2>
+<p>C'est dans cet espace que vous pouvez gérer vos commandes</p>
+{#
+   --- Affichage de l'utilisateur connecter ---
+#}
+<a href="{{ path("account_order") }}">Retour</a>
+
+<hr>
+
+<strong> Commande passée le :</strong> {{ order.createdAt | date("d/m/Y") }} <br>
+<strong> Référence de ma commande : </strong> {{ order.reference }}{% if order.state == 1 %}
+            <span class ="badge bg-success bg-gradient">Paiement accepté<i class="far fa-check-circle m-1"></i></span>
+       {% elseif order.state == 2 %} 
+         <span class ="badge bg-warning bg-gradient">Preparation en cours ... <i class="fas fa-box-open m-1"></i></span>
+       {% elseif order.state == 3 %} 
+         <span class ="badge bg-info bg-gradient">Livraison en cours  ... <i class="far fa-clock m-1"></i></span>
+          {% elseif order.state == 4 %} 
+         <span class ="badge bg-success bg-gradient">Livraison effectué <i class="far fa-check-square m-1"></i>  </span>
+       {% endif %} <br>
+<strong> Transporteur choisit : </strong> {{order.carrierName}} 
+<hr>
+<strong>Détails: </strong>
+
+
+<table class="table table-hover mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Produit</th>
+      <th scope="col">Quantité</th>
+      <th scope="col">Prix Unitaire</th>
+      <th scope="col">Total</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in order.orderDetails %}
+
+  
+    <tr>
+      
+      <td>{{ product.product }}</td>
+      <td class="item-success">{{ product.quantity }}</td>
+      <td>{{ (product.price  / 100 ) | number_format(2,',','.')  }}</td>
+      <td>{{ (product.total / 100 )  | number_format(2,',','.')  }}</td>
+      <td>
+
+     
+        
+ 
+       
+       </td>
+      
+
+    </tr>
+    
+  {% endfor %}
+
+  </tbody>
+</table>
+<div class="text-right mt-5">
+<strong>Sous-Total : </strong> {{ (order.getTotal / 100 )  | number_format(2,',','.')  }}<br>
+<strong> Livraison : {{ (order.carrierPrice / 100  )  | number_format(2,',','.')  }}</strong><br>
+<strong>Total : {{ ((order.carrierPrice + order.getTotal) / 100 )| number_format(2,',','.')  }}  €</strong>
+</div>
+
+{% endblock %}

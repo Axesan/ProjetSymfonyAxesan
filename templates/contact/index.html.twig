@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block content %}
+<h2>Nous contacter</h2>
+<p>N'hesitez pas à prendre contact avec notre équipe nous vous répondrons dans les meilleurs délais</p>
+  
+{# On met en place notre notification qui et 'addflash' qui à été fait dans notre controller #}
+     {% for message in app.flashes('notice') %}
+                    <div class="alert alert-success">
+                        {{message}}
+                    </div>
+                {% endfor %}
+<div class="row">
+<div class="col-md-8">
+{{form(form)}}
+</div>
+
+<div class="col-md-4">
+        <strong>L'e-commerce contact : </strong>
+        <hr>
+        <p class="my-auto">
+            <strong>Numéros de téléphone :</strong> 06.16.13.12.23 <small class="fst-italic"> (Numeros fictive)</small>
+            <strong>Adresse :</strong> 25 r du pêche 91000 Paris <small class="fst-italic"> (Adresse fictive)</small><br>
+            <strong> Email :</strong> axel.stanislas.cdaw@gmail.com 
+        </p>
+        <hr>
+            <ul class="list-group">
+                <li class="list-group-item bg-secondary bg-opacity-75">Nos réseaux</li>
+                <li class="list-group-item fs-2"><a href="https://github.com/Axesan" class="bi bi-github text-dark"></a> <a href="https://codepen.io/axesan/" class="bi bi-brush text-dark"></a></li>
+            </ul>
+</div>
+</div>
+
+
+
+{% endblock %}
