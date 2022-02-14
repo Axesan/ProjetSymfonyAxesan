@@ -73,7 +73,7 @@ Allez dans le dossier config/package/translation.yaml
 --------------------------------------------
 # Création de formulaire de connexion :
 
-symfony console make:auth
+$ symfony console make:auth
 
 --------------------------------------------
 # CREATION DE L'administration 
@@ -81,10 +81,10 @@ symfony console make:auth
 $ composer require easycorp/easyadmin-bundle
 
 Mettre en place le "dashboard" 
--
+
 $ symfony console make:admin:dashboard 
 --------------------------------------------
-|
+
 --------------------------------------------
 DEBUG SYMFONY : 
 Permet de tcheker les routes associer a notre projet . 
@@ -132,8 +132,7 @@ composer.phar require symfony/twig-pack
 
 Creation d'un dossier Bundle ainsi qu'un dossier Exception avec un fichier "error.html.twig"
 
-
-Saissisez cet commande pour vider le cahce de la prod :
+Saissisez cet commande pour vider le cahce de la prod ou dev:
 $ symfony console cache:clear
 
 
