@@ -24,12 +24,9 @@ public function index(): Response {
        
         $products = $this->entityManager->getRepository(Product::class) -> findByisBest(1);
         $categorie = $this->entityManager->getRepository(Category::class) -> findAll();
-        $header =$this->entityManager->getRepository(Header::class) -> findAll() ;
-
-  
-
-
-
+        $header =$this->entityManager->getRepository(Header::class) -> findAll();
+    
+        // On passe nos variables dans la vue twig . 
         return $this->render('home/index.html.twig', [
           "products" => $products,
           "categorie" => $categorie,
