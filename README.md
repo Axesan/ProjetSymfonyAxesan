@@ -1,4 +1,3 @@
---------------------------------------------
 # Créations d'un controller : 
 $ symfony console make:controller
 
@@ -7,9 +6,6 @@ Un controller permet d'afficher nos pages , on peut donc faire passer des variab
 Ces donc dans ce fichier qu'on réalise nos routes .  
 Créer egalement dans le dossier 'template' la vue associer
 
---------------------------------------------
-|
---------------------------------------------
 # Créations d'une entité : 
 $ symfony console make:entity 
 
@@ -22,14 +18,15 @@ un "firstname" en utilisant la meme commande et le nom de classe a mettre a jour
 et ne pas oublier de migrer la mise a jour de l'entité 
 
 --------------------------------------------
-|
---------------------------------------------
+
 # Le dossier "Repository" :
 Centralise tous ce qui touche a la récupération des entités 
+
 --------------------------------------------
-|
+
 --------------------------------------------
 # Configuration de notre base de données Migration 
+
 La connexion à la base de données s'effectue dans le fichier '.env' pour notre exemple nous utiliserons mysql : 
 *DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"*
 
