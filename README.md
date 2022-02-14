@@ -108,8 +108,8 @@ Installer "Stripe" qui est un moyen de paiement qui sera installer partir de "co
 Installation de la librairie : 
 composer require stripe/stripe-php
 
-On copie notre clé Api dan 'order' pour la récuperation des données donc du panier : 
-sk_test_51KO0jGKxPRXSB4TZ95ESqBjUDLkBV0EHxyb5txchSNwu6cfJ7tj23NvVQNmGpD43KQw56n7NiTbMd6kqT0XyqeLQ00BBUZHEaK
+On copie notre clé Api dan  pour la récuperation des données donc du panier . 
+
 
 --------------------------------------------
 |
